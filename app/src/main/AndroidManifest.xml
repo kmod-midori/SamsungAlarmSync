@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <permission
+        android:name="com.sec.android.app.clockpackage.permission.READ_ALARM"
+        android:protectionLevel="normal" />
+
+    <uses-permission android:name="com.sec.android.app.clockpackage.permission.READ_ALARM" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SamsungAlarmSync">
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="ExportedReceiver">
+            <intent-filter>
+                <action android:name="com.android.deskclock.ALARM_ALERT" />
+                <action android:name="com.android.deskclock.ALARM_ARRIVING" />
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name=".AlarmProvider"
+            android:authorities="com.samsung.sec.android.clockpackage"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="ExportedContentProvider" />
+
+        <receiver
+            android:name=".WatchReceiver"
+            android:enabled="false"
+            android:exported="true"
+            tools:ignore="ExportedReceiver">
+            <intent-filter>
+                <action android:name="com.sec.android.clockpackage.SET_ALARM" />
+                <action android:name="com.sec.android.clockpackage.EDIT_ALARM" />
+                <action android:name="com.sec.android.app.clockpackage.alarm.FORWARD_TO_CLOCK" />
+                <action android:name="com.sec.android.app.clockpackage.alarm.SYNC_WATCH_INFO" />
+                <action android:name="com.samsung.sec.android.clockpackage.alarm.ALARM_STOP" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SamsungAlarmSync">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
