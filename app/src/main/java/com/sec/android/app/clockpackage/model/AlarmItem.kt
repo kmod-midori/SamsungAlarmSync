@@ -16,16 +16,4 @@ data class AlarmItem(
     val mSnoozeDuration: Int = 0,
     val mSnoozeRepeat: Int = 0,
     val mSortOrder: Int = 0,
-) {
-    fun isOneTimeAlarm(): Boolean {
-        return (this.mRepeatType and 15) == 1
-    }
-
-    fun isWakeUpAlarm(): Boolean {
-        return (this.mDailyBriefing and 262144) == 262144
-    }
-
-    fun isBedtimeAlarm(): Boolean {
-        return (this.mDailyBriefing and 131072) == 131072
-    }
-}
+)

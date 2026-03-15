@@ -9,25 +9,16 @@ import android.util.Log
 import com.sec.android.app.clockpackage.model.AlarmItem
 
 class AlarmProvider : ContentProvider() {
-
-    override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
-        TODO("Implement this to handle requests to delete one or more rows")
-    }
-
-    override fun getType(uri: Uri): String? {
-        TODO(
-            "Implement this to handle requests for the MIME type of the data" +
-                    "at the given URI"
-        )
-    }
-
-    override fun insert(uri: Uri, values: ContentValues?): Uri? {
-        TODO("Implement this to handle requests to insert a new row.")
-    }
-
-    override fun onCreate(): Boolean {
-        return true
-    }
+    override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?) = 0
+    override fun getType(uri: Uri) = null
+    override fun insert(uri: Uri, values: ContentValues?) = null
+    override fun onCreate() = true
+    override fun update(
+        uri: Uri,
+        values: ContentValues?,
+        selection: String?,
+        selectionArgs: Array<String>?
+    ) = 0
 
     override fun query(
         uri: Uri, projection: Array<String>?, selection: String?,
@@ -74,54 +65,54 @@ class AlarmProvider : ContentProvider() {
                 val alarms = listOf(
                     AlarmItem(
                         mAlarmId = 100,
-                        mAlarmName = "",
-                        mAlarmTime = 820,
+                        mAlarmName = "Phone Alarm",
                         mAlertTime = System.currentTimeMillis(),
-                        mRepeatType = 0,
-                        mEnable = 0,
                     )
                 )
 
                 val mc = MatrixCursor(columnNames)
                 for (alarm in alarms) {
-                    mc.addRow(arrayOf<Any?>(
-                        alarm.mAlarmId,           // 0
-                        alarm.mEnable,            // 1
-                        null,                     // 2
-                        alarm.mAlertTime,         // 3
-                        alarm.mAlarmTime,         // 4
-                        alarm.mRepeatType,        // 5
-                        null,                     // 6
-                        alarm.mSnoozeActive,      // 7
-                        alarm.mSnoozeDuration,    // 8
-                        alarm.mSnoozeRepeat,      // 9
-                        alarm.mSnoozeDoneCount,   // 10
-                        alarm.mDailyBriefing,     // 11
-                        alarm.mSortOrder,         // 12
-                        null,                     // 13
-                        null,                     // 14
-                        alarm.mAlarmSoundType,    // 15
-                        null,                     // 16
-                        null,                     // 17
-                        null,                     // 18
-                        null,                     // 19
-                        alarm.mAlarmName,         // 20
-                        null,                     // 21
-                        null,                     // 22
-                        null,                     // 23
-                        null,                     // 24
-                        null,                     // 25
-                        null,                     // 26
-                        alarm.mBedtimeAlarmTime,  // 27
-                        null,                     // 28
-                        null,                     // 29
-                        null,                     // 30
-                        null,                     // 31
-                        alarm.mGroupId            // 32
-                    ))
+                    mc.addRow(
+                        arrayOf<Any?>(
+                            alarm.mAlarmId,           // 0
+                            alarm.mEnable,            // 1
+                            null,                     // 2
+                            alarm.mAlertTime,         // 3
+                            alarm.mAlarmTime,         // 4
+                            alarm.mRepeatType,        // 5
+                            null,                     // 6
+                            alarm.mSnoozeActive,      // 7
+                            alarm.mSnoozeDuration,    // 8
+                            alarm.mSnoozeRepeat,      // 9
+                            alarm.mSnoozeDoneCount,   // 10
+                            alarm.mDailyBriefing,     // 11
+                            alarm.mSortOrder,         // 12
+                            null,                     // 13
+                            null,                     // 14
+                            alarm.mAlarmSoundType,    // 15
+                            null,                     // 16
+                            null,                     // 17
+                            null,                     // 18
+                            null,                     // 19
+                            alarm.mAlarmName,         // 20
+                            null,                     // 21
+                            null,                     // 22
+                            null,                     // 23
+                            null,                     // 24
+                            null,                     // 25
+                            null,                     // 26
+                            alarm.mBedtimeAlarmTime,  // 27
+                            null,                     // 28
+                            null,                     // 29
+                            null,                     // 30
+                            null,                     // 31
+                            alarm.mGroupId            // 32
+                        )
+                    )
                 }
                 return mc
             }
+
             "/groupAlarm" -> {
                 Log.i(TAG, "Got groupAlarm query")
             }
@@ -129,14 +120,7 @@ class AlarmProvider : ContentProvider() {
         return null
     }
 
-    override fun update(
-        uri: Uri, values: ContentValues?, selection: String?,
-        selectionArgs: Array<String>?
-    ): Int {
-        TODO("Implement this to handle requests to update one or more rows.")
-    }
-
     companion object {
-        private val TAG = "AlarmProvider"
+        private const val TAG = "AlarmProvider"
     }
 }

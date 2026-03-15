@@ -20,26 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SamsungAlarmSync">
         <receiver
-            android:name=".AlarmReceiver"
+            android:name=".alarm.receiver.AlarmSecurityReceiver"
             android:enabled="true"
-            android:exported="true"
-            tools:ignore="ExportedReceiver">
-            <intent-filter>
-                <action android:name="com.android.deskclock.ALARM_ALERT" />
-                <action android:name="com.android.deskclock.ALARM_ARRIVING" />
-            </intent-filter>
-        </receiver>
-
-        <provider
-            android:name=".AlarmProvider"
-            android:authorities="com.samsung.sec.android.clockpackage"
-            android:enabled="true"
-            android:exported="true"
-            tools:ignore="ExportedContentProvider" />
-
-        <receiver
-            android:name=".WatchReceiver"
-            android:enabled="false"
             android:exported="true"
             tools:ignore="ExportedReceiver">
             <intent-filter>
@@ -51,13 +33,19 @@
             </intent-filter>
         </receiver>
 
+        <provider
+            android:name=".AlarmProvider"
+            android:authorities="com.samsung.sec.android.clockpackage"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="ExportedContentProvider" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.SamsungAlarmSync">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
